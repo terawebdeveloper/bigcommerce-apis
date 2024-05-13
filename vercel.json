@@ -1,32 +1,19 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "index.js",
-        "use": "@now/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "index.js"
-      }
-    ],
     "headers": [
       {
-        "source": "/checkout", 
+        "source": "/(.*)",
         "headers": [
           {
             "key": "Access-Control-Allow-Origin",
-            "value": "https://internationalpartnerseu.com"
+            "value": "*"
           },
           {
             "key": "Access-Control-Allow-Methods",
-            "value": "GET, POST, OPTIONS"
+            "value": "GET, POST, OPTIONS, PUT, DELETE"
           },
           {
             "key": "Access-Control-Allow-Headers",
-            "value": "Content-Type"
+            "value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
           }
         ]
       }
