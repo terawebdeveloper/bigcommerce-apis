@@ -28,7 +28,10 @@ app.get('/checkout', async (req, res) => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                'X-Auth-Token': 'gsg7tpt974p4yoiunecoh8r8oog84s9'
+                'X-Auth-Token': 'gsg7tpt974p4yoiunecoh8r8oog84s9',
+                'Access-Control-Allow-Origin' : 'https://internationalpartnerseu.com',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type',
             }
         });
         res.json(response.data);
