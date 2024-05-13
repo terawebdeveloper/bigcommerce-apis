@@ -1,5 +1,5 @@
-import express from "express";
-import axios from 'axios';
+// import express from "express";
+// import axios from 'axios';
 // const app = express();
 // const port = 3000;
 
@@ -13,8 +13,8 @@ import axios from 'axios';
 
 
 
-// const express = require('express');
-// const axios = require('axios');
+const express = require('express');
+const axios = require('axios');
 
 const app = express();
 const port =  3000;
