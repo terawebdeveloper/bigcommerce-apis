@@ -13,37 +13,86 @@
 
 
 
+// const express = require('express');
+// const axios = require('axios');
+
+// const app = express();
+// const port =  3000;
+
+// app.use(express.json());
+
+
+// app.get('/checkout', async (req, res) => {
+//     try {
+//         const response = await axios.get('https://api.bigcommerce.com/stores/d3h8howbsb/v3/checkouts/5a676375-9921-40c8-9970-6685d845b673',{
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+//                 'X-Auth-Token': 'gsg7tpt974p4yoiunecoh8r8oog84s9',
+//                 'Access-Control-Allow-Origin' : 'https://internationalpartnerseu.com',
+//                 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+//                 'Access-Control-Allow-Headers': 'Content-Type',
+//             },
+//             credentials: true
+//         });
+//         res.json(response.data);
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// });
+
+// app.listen(port, () => {
+//     console.log(`Proxy server listening at http://localhost:${port}`);
+// });
+
+
+
+
+// In your custom server file (e.g., server.js)
 const express = require('express');
-const axios = require('axios');
+const next = require('next');
+const cors = require('cors');
 
-const app = express();
-const port =  3000;
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
-app.use(express.json());
+app.prepare().then(() => {
+  const server = express();
 
+  // Enable CORS
+  server.use(cors());
 
-app.get('/checkout', async (req, res) => {
-    try {
-        const response = await axios.get('https://api.bigcommerce.com/stores/d3h8howbsb/v3/checkouts/5a676375-9921-40c8-9970-6685d845b673',{
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                'X-Auth-Token': 'gsg7tpt974p4yoiunecoh8r8oog84s9',
-                'Access-Control-Allow-Origin' : 'https://internationalpartnerseu.com',
-                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type',
-            },
-            credentials: true
-        });
-        res.json(response.data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
+  // Your other server routes
+  // server.get('/api/someendpoint', (req, res) => {...});
+
+    server.get('/checkout', async (req, res) => {
+        try {
+            const response = await axios.get('https://api.bigcommerce.com/stores/d3h8howbsb/v3/checkouts/5a676375-9921-40c8-9970-6685d845b673',{
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    'X-Auth-Token': 'gsg7tpt974p4yoiunecoh8r8oog84s9',
+                    'Access-Control-Allow-Origin' : '*',
+                    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type',
+                },
+                credentials: true
+            });
+            res.json(response.data);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    });
+
+  server.all('*', (req, res) => {
+    return handle(req, res);
+  });
+
+  server.listen(3000, err => {
+    if (err) throw err;
+    console.log('> Ready on http://localhost:3000');
+  });
 });
-
-app.listen(port, () => {
-    console.log(`Proxy server listening at http://localhost:${port}`);
-});
-
-
