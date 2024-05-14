@@ -54,8 +54,6 @@ const express = require('express');
 const cors = require('cors');
 
 
-const handle = app.getRequestHandler();
-
   const server = express();
 
   // Enable CORS
@@ -64,7 +62,7 @@ const handle = app.getRequestHandler();
   // Your other server routes
   // server.get('/api/someendpoint', (req, res) => {...});
 
-    server.get('/checkout', async (req, res) => {
+    server.get('/api/checkout', async (req, res) => {
         try {
             const response = await axios.get('https://api.bigcommerce.com/stores/d3h8howbsb/v3/checkouts/5a676375-9921-40c8-9970-6685d845b673',{
                 headers: {
