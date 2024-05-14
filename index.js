@@ -19,7 +19,13 @@ const axios = require('axios');
 const app = express();
 const port =  3000;
 
-app.use(express.json());
+// app.use(express.json());
+app.use(cors({
+    origin: 'http://example.com', // use your actual domain name (or localhost), using * is not recommended
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Origin', 'X-Requested-With', 'Accept', 'x-client-key', 'x-client-token', 'x-client-secret', 'Authorization'],
+    credentials: true
+}))
 
 
 app.get('/checkout', async (req, res) => {
@@ -32,8 +38,7 @@ app.get('/checkout', async (req, res) => {
                 'Access-Control-Allow-Origin' : 'https://internationalpartnerseu.com',
                 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
                 'Access-Control-Allow-Headers': 'Content-Type',
-            },
-            credentials: true
+            }
         });
         res.json(response.data);
     } catch (error) {
