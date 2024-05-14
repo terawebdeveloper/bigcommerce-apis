@@ -32,7 +32,8 @@ app.get('/checkout', async (req, res) => {
                 'Access-Control-Allow-Origin' : 'https://internationalpartnerseu.com',
                 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
                 'Access-Control-Allow-Headers': 'Content-Type',
-            }
+            },
+            credentials: true
         });
         res.json(response.data);
     } catch (error) {
