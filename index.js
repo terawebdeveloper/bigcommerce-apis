@@ -23,6 +23,8 @@ app.get('/api/checkout-data', async (req, res) => {
                 'Access-Control-Allow-Headers': 'Content-Type',
             }
         });
+        console.log(`Response status: ${response}`);
+        
         res.json(response.data);
     } catch (error) {
         console.error(error);
