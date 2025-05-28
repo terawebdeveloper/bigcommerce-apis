@@ -26,12 +26,12 @@ app.get('/api/checkout-data', async (req, res) => {
         res.json(response.data);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error xx' });
     }
 });
 
 app.listen(port, () => {
-    console.log(`Proxy server listening at http://localhost:${port}`);
+    console.log(`Proxy server listening at xx http://localhost:${port}`);
 });
 
 
