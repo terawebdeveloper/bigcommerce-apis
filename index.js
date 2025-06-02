@@ -12,13 +12,8 @@ app.use(cors({
 
 
 app.get('/api/checkout-data', async (req, res) => {
-      const checkoutId = req.query.checkout_id;
- 
-    if (!checkoutId) {
-        return res.status(400).json({ error: 'Missing checkout_id parameter' });
-    }
     try {                                                                                                                                   
-        const response = await axios.get(`https://api.bigcommerce.com/stores/d3h8howbsb/v3/checkouts/b9f238c9-ae3f-4a9f-b702-bb9df140e31c/${checkoutId}`,{
+        const response = await axios.get('https://api.bigcommerce.com/stores/d3h8howbsb/v3/checkouts/b9f238c9-ae3f-4a9f-b702-bb9df140e31c',{
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
